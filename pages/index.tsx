@@ -2,8 +2,14 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
+import { Year, Record } from "./types/HomeTypes";
 
-const Home: NextPage = () => {
+interface HomeProps {
+  years: Year[];
+}
+
+const Home: NextPage = ({ years }: HomeProps) => {
+  years.sort((a, b) => a.fields.Name - b.fields.Name);
   return (
     <div className={styles.container}>
       <Head>
@@ -15,11 +21,13 @@ const Home: NextPage = () => {
       <main className={styles.container}>
         <h1 className={styles.header}>Miigii</h1>
         <div className={styles.years}>
-          <div id="2018">2018</div>
-          <div id="2019">2019</div>
-          <div id="2020">2020</div>
-          <div id="2021">2021</div>
-          <div id="2022">2022</div>
+          {years.map((year) => {
+            return (
+              <div key={year.id} id={year.fields.Name.toString()}>
+                {year.fields.Name}
+              </div>
+            );
+          })}
         </div>
       </main>
 
@@ -29,3 +37,12 @@ const Home: NextPage = () => {
 };
 
 export default Home;
+
+export async function getStaticProps({}) {
+  const url = `https://api.airtable.com/v0/appvWjkNwxwdONFnS/Home\?api_key\=${process.env.DB_KEY}`;
+  const response = await fetch(url);
+  const record: Record = await response.json();
+  return {
+    props: { years: record.records },
+  };
+}

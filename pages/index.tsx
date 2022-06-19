@@ -10,6 +10,7 @@ interface HomeProps {
 
 const Home: NextPage = ({ years }: HomeProps) => {
   years.sort((a, b) => a.fields.Name - b.fields.Name);
+  console.log(years);
   return (
     <div className={styles.container}>
       <Head>
@@ -23,8 +24,17 @@ const Home: NextPage = ({ years }: HomeProps) => {
         <div className={styles.years}>
           {years.map((year) => {
             return (
-              <div key={year.id} id={year.fields.Name.toString()}>
-                {year.fields.Name}
+              <div
+                key={year.id}
+                id={year.fields.Name.toString()}
+                style={{
+                  backgroundImage: `url(${year.fields.Image[0].url})`,
+                  backgroundRepeat: "no-repeat",
+                  backgroundSize: "cover",
+                  backgroundPosition: "center top",
+                }}
+              >
+                <p>{year.fields.Name}</p>
               </div>
             );
           })}

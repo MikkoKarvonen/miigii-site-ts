@@ -16,10 +16,21 @@
 .years div{
   justify-content: space-evenly;
   align-items: center;
-  transition: width 0.5s ease-out 100ms;
+  transition: width 0.5s, filter 0.5s;
+  filter: grayscale(100%);
+}
+
+.years div p{
+  color: white;
+  font-size: 4rem;
+  background-color: black;
+  padding: 0.5rem;
+  width: 100%;
+  text-align: center;
 }
 
 .years div:hover{
   width: 200%;
-  background-color: antiquewhite;
+  filter: grayscale(0%);
+  
 }

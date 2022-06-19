@@ -10,7 +10,7 @@ export interface Year {
 
 interface ImageRoot {
   Name: number;
-  Image: Image;
+  Image: Image[];
 }
 
 interface Image {

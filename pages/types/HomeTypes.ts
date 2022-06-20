@@ -11,6 +11,8 @@ export interface Year {
 interface ImageRoot {
   Name: number;
   Image: Image[];
+  Albums: string;
+  SubImage: Image[];
 }
 
 interface Image {

@@ -1,5 +1,6 @@
 import type { NextPage } from "next";
 import Link from "next/link";
+import Header from "../components/Header";
 import Layout from "../components/layout";
 import styles from "../styles/Home.module.css";
 import { Year, Record } from "./types/HomeTypes";
@@ -10,27 +11,10 @@ interface HomeProps {
 
 const Home: NextPage = ({ years }: HomeProps) => {
   years.sort((a, b) => a.fields.Name - b.fields.Name);
+  const images = years.map((year) => year.fields.Image);
   return (
     <Layout>
-      <div className={styles.years}>
-        {years.map((year) => {
-          return (
-            <Link href={`/posts/${year.fields.Name}`} key={year.id}>
-              <div
-                id={year.fields.Name.toString()}
-                style={{
-                  backgroundImage: `url(${year.fields.Image[0].url})`,
-                  backgroundRepeat: "no-repeat",
-                  backgroundSize: "cover",
-                  backgroundPosition: "center top",
-                }}
-              >
-                <p>{year.fields.Name}</p>
-              </div>
-            </Link>
-          );
-        })}
-      </div>
+      <Header images={images} />
     </Layout>
   );
 };

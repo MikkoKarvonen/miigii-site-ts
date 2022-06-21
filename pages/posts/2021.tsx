@@ -1,3 +1,4 @@
+import Header from "../../components/Header";
 import Layout from "../../components/layout";
 import { Year, Record } from "../types/HomeTypes";
 
@@ -8,6 +9,7 @@ interface PostProps {
 const Post = ({ record }: PostProps) => {
   return (
     <Layout>
+      <Header images={[]} />
       <div
         className="subImage"
         style={{
